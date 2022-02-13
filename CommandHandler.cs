@@ -27,31 +27,7 @@ namespace ScenarioBot
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
 
             _client.InteractionCreated += HandleInteraction;
-
-            _commands.SlashCommandExecuted += SlashCommandExecuted;
-            _commands.ContextCommandExecuted += ContextCommandExecuted;
-            _commands.ComponentCommandExecuted += ComponentCommandExecuted;
         }
-
-        private Task SlashCommandExecuted(SlashCommandInfo info, Discord.IInteractionContext ctx, IResult result)
-        {
-            ctx.Interaction.RespondAsync("slash");
-            return Task.CompletedTask;
-        }
-
-        private Task ContextCommandExecuted(ContextCommandInfo info, Discord.IInteractionContext ctx, IResult result)
-        {
-            ctx.Interaction.RespondAsync("context");
-            return Task.CompletedTask;
-        }
-
-        private Task ComponentCommandExecuted(ComponentCommandInfo info, Discord.IInteractionContext ctx, IResult result)
-        {
-            ctx.Interaction.RespondAsync("component");
-            return Task.CompletedTask;
-        }
-
-
 
         private async Task HandleInteraction (SocketInteraction arg)
         {
@@ -59,6 +35,7 @@ namespace ScenarioBot
             {
                 var ctx = new SocketInteractionContext(_client, arg);
                 await _commands.ExecuteCommandAsync(ctx, _services);
+                _commands.
             }
             catch (Exception ex)
             {
