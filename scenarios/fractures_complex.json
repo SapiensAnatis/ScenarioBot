@@ -1,0 +1,95 @@
+{
+    "info": {
+        "name": "Complex Fractures Scenario",
+        "description": "Medium difficulty rugby injury scenario",
+        "id": "fractures-complex"
+    },
+
+    "stages": [
+        {
+            "text": "You are watching your housemate's rugby practice, when all of a sudden one of the players in the scrum is down on the ground and screaming in pain. They are complaining that one of the players kicked them. The other players are all stood around doing very little, and as it's a practice there are no first aiders around, though there is a first aid kit. You observe sharp, intense, throbbing of mid lower leg/tib fib. Their lower leg is quite bruised and swollen, with visible imprint of stud marks. There is a small wound on one of the stud imprints, which is slightly bleeding, but is able to be controlled by plaster and gentle pressure. The wound site is quite dirty/muddy. The leg does not look visibly deformed. Patient is sat up on arrival.",
+
+            "obs": [
+                "Resp. rate: 22 -- but difficult to assess due to cries of pain",
+                "Heart rate: 102",
+                "Temperature: 37.5",
+                "Cap refill: <2 seconds on both hands/feet",
+                "Pain: 9/10, 10/10 on palpation/movement"
+            ],
+            "questions": [
+                {
+                    "question": "What is likely to be wrong with this patient?",
+                    "answer": "Fracture in the tibia and/or fibia."
+                },
+                {
+                    "question": "What considerations would you make when attempting to check cap refill on the toes?",
+                    "answer": "To avoid disturbing the injury any more, shoes/socks should be cut through rather than removed by hand."
+                },
+                {
+                    "question": "What further assesments could you perform on this patient?",
+                    "answer": "PQRSTA (or SOCRATES) and SAMPLE."
+                },
+                {
+                    "question": "What other concerns do you have about this patient, aside from the suspected fracture?",
+                    "answer": "Exposure to the environment -- consider giving them a blanket. It may also be worth cleaning the wound to reduce infection risk."
+                }
+            ]
+        },
+
+        {
+            "text": "You perform the secondary survey and pain assessment (/obs).",
+            "obs": [
+                "S: Pain in lower leg",
+                "A: None",
+                "M: Heparin injections monthly at hospital, co-codamol when required",
+                "P: Congenital heart defect (pulmonary atresia) which increases the risk of blood clots in the lungs (hence heparin). Previous ankle fracture in similar circumstances 2 years ago on the same leg",
+                "L: Meal before practice",
+                "E: As described above",
+                "",
+                "P: Movement, palpitation",
+                "Q: Sharp, throbbing, intense",
+                "R: Radiates up to knee and down to toes",
+                "S: 9/10",
+                "T: Since fall, not improving with time",
+                "A: N/A",
+                "",
+                "Resp. rate: 18",
+                "Heart rate: 70",
+                "Temperature: 36.5",
+                "Cap refill: <3 secs on both feet -- slightly more sluggish",
+                "Pain: 8/10"
+            ],
+            "questions": [
+                {
+                    "question": "What treatment could you provide this patient?",
+                    "answer": "Immobilize the legs, by way of a buddy splint or otherwise."
+                },
+                {
+                    "question": "Does this patient need an ambulance?",
+                    "answer": "Yes, and one should be called ASAP."
+                }
+            ]
+        },
+
+        {
+            "text": "It has been fifteen minutes since you arrived on the scene, and the patient's condition has changed. The wound is no longer bleeding and the patient is complaining of thirst and nausea. Their skin has become pale.",
+            "obs": [
+                "Resp. rate: 22",
+                "Heart rate: 90",
+                "Temperature: 36.5",
+                "Cap refill: <3 secs on both feet, but extensive bruising now visible on injured leg",
+                "Pain: 7/10"
+            ],
+            "questions": [
+                {
+                    "question": "What do you think has happened to the patient?",
+                    "answer": "They are showing signs of shock due to internal bleeding."
+                },
+                {
+                    "question": "What should you do?",
+                    "answer": "Inform 999, provide a blanket if you didn't before, but do *not* raise the patient's legs as is usually recommended."
+                }
+            ]
+        }
+    ]
+}

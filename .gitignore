@@ -8,3 +8,6 @@ obj/*
 # Secrets
 appsettings.json
 ssh*
+
+# Program state
+sessions.json
