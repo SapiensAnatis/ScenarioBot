@@ -98,11 +98,18 @@ namespace ScenarioBot.Modules
             }
         }
 
-        [SlashCommand("logout", "Test saving stuff")]
+        [SlashCommand("logout", "Disconnect the bot from Discord.")]
         [RequireOwner]
         public async Task Logout() {
             await RespondAsync("Goodbye...");
             await Context.Client.LogoutAsync();
+        }
+
+        [SlashCommand("reload", "Reload the scenario list.")]
+        [RequireOwner]
+        public async Task ReloadScenarios() {
+            await Program.ReloadScenarios();
+            await RespondAsync("Reload successful.", ephemeral: true);
         }
 
         #endregion

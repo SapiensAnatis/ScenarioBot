@@ -1,6 +1,4 @@
-﻿#define DEBUG
-
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using Discord.Interactions;
 
@@ -12,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ScenarioBot {
     public class Program
@@ -20,6 +19,28 @@ namespace ScenarioBot {
         private static List<Session> sessions;
 
         #region Interfaces
+
+        // TODO: I should probably move these out of Program and into another class to reduce
+        // clutter..
+        public static async Task ReloadScenarios() {
+            await Log(new LogMessage(
+                LogSeverity.Info, "ReloadScenarios()", "Scenario reload triggered"
+            ));
+
+            Program.scenarios.Clear();
+            string[] filenames = Directory.GetFiles("scenarios/");
+            foreach (string f in filenames) {
+                await Log(new LogMessage(
+                    LogSeverity.Info, "ReloadScenarios()", $"Loading scenario {f}..."
+                ));
+
+                string json = await File.ReadAllTextAsync(f);
+                Scenario s = JsonConvert.DeserializeObject<Scenario>(json) 
+                    ?? throw new Exception("Deserialized scenario was null!");
+
+                Program.scenarios.Add(s);
+            }
+        }
         public static Scenario ScenarioFactory(string scenario_id) {
             // Create new scenario without having to read JSON again
             return new Scenario(
@@ -74,6 +95,7 @@ namespace ScenarioBot {
         #endregion
 
         #region Setup
+
         public static void Main(string[] args) {
             IConfiguration config = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json", optional: true)
@@ -84,17 +106,21 @@ namespace ScenarioBot {
             // Load scenarios
             string[] filenames = Directory.GetFiles("scenarios/");
             foreach (string f in filenames) {
-                Console.WriteLine("Reading scenario " + f);
+                Log(new LogMessage(
+                    LogSeverity.Info, "Main()", $"Loading scenario {f}..."
+                ));
 
                 string json = File.ReadAllText(f);
-                Scenario s = JsonConvert.DeserializeObject<Scenario>(json);
+                Scenario s = JsonConvert.DeserializeObject<Scenario>(json) 
+                    ?? throw new Exception("Deserialized scenario was null!");
 
                 Program.scenarios.Add(s);
             }
 
             // Load scenario session data
             string session_json = File.ReadAllText("sessions.json");
-            Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json);
+            Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json)
+                ?? throw new Exception("Failed to deserialize session data!");
             
             // Initialize session objects
             foreach (Session sesh in Program.sessions) {
@@ -106,7 +132,7 @@ namespace ScenarioBot {
 
             // Set up timer to save data
             CancellationTokenSource tokenSource = new CancellationTokenSource();
-            Task timerTask = Program.SavePeriodically(TimeSpan.FromMinutes(1), tokenSource.Token);
+            Task timerTask = Program.SavePeriodically(TimeSpan.FromMinutes(30), tokenSource.Token);
 
             MainAsync(config).GetAwaiter().GetResult();
         }
