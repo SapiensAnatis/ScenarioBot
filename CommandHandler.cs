@@ -20,16 +20,6 @@ namespace ScenarioBot
             _client = client;
             _commands = commands;
             _services = services;
-
-            _commands.ComponentCommandExecuted += ComponentCommandExecuted;
-        }
-        private Task ComponentCommandExecuted (ComponentCommandInfo arg1, Discord.IInteractionContext arg2, IResult arg3)
-        {
-            Console.WriteLine(
-                $"Component interaction: {arg1.Name}"
-            );
-
-            return Task.CompletedTask;
         }
 
         public async Task InitializeAsync()
@@ -45,7 +35,7 @@ namespace ScenarioBot
                 var ctx = new SocketInteractionContext(_client, arg);
                 await _commands.ExecuteCommandAsync(ctx, _services);
             }
-            catch (NullReferenceException ex) {
+            catch (NullReferenceException) {
                 await arg.RespondAsync("This prompt has expired.", ephemeral: true);
             }
             catch (Exception ex) {
