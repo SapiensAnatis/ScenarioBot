@@ -1,7 +1,4 @@
 using Newtonsoft.Json; 
-using Newtonsoft.Json.Linq;
-
-using System.Linq;
 
 namespace ScenarioBot {
     // Root class
@@ -45,6 +42,7 @@ namespace ScenarioBot {
         public ulong user_id { get; set; }
         public string scenario_id { get; set; }
         public int stage { get; set; }
+        public string guid { get; set; }
 
         // Not set by json deserialization
         [JsonIgnore]

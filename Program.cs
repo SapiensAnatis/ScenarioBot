@@ -35,7 +35,8 @@ namespace ScenarioBot {
             Session sess = new Session() {
                 scenario_id = scenario_id,
                 user_id = user_id,
-                scenario_obj = scenario
+                scenario_obj = scenario,
+                guid = System.Guid.NewGuid().ToString()
             };
 
             Program.sessions.Add(sess);
@@ -56,8 +57,12 @@ namespace ScenarioBot {
             return result;
         }
 
-        public static Session? GetUserSession(ulong user_id) {
+        public static Session? GetSessionByUser(ulong user_id) {
             return Program.sessions.FirstOrDefault(s => s.user_id == user_id);
+        }
+
+        public static Session? GetSessionByGuid(string guid) {
+            return Program.sessions.FirstOrDefault(s => s.guid == guid);
         }
 
         public static void ClearUserScenario(ulong user_id) {
@@ -91,13 +96,17 @@ namespace ScenarioBot {
             string session_json = File.ReadAllText("sessions.json");
             Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json);
             
-            // Initialize scenario objects for each
+            // Initialize session objects
             foreach (Session sesh in Program.sessions) {
                 Scenario to_copy = Program.scenarios.Where(
                     Scenario => Scenario.info.id == sesh.scenario_id
                 ).First();
                 sesh.scenario_obj = new Scenario(to_copy);
             }
+
+            // Set up timer to save data
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            Task timerTask = Program.SavePeriodically(TimeSpan.FromMinutes(1), tokenSource.Token);
 
             MainAsync(config).GetAwaiter().GetResult();
         }
@@ -162,12 +171,27 @@ namespace ScenarioBot {
             #endif
         }
         
+        // Save data every so often
+        static async Task SavePeriodically(TimeSpan interval, CancellationToken token)
+        {
+            while (true)
+            {
+                string s = JsonConvert.SerializeObject(Program.sessions);
+                await File.WriteAllTextAsync("sessions.json", s);
+                var l = new LogMessage(LogSeverity.Info, "Program.cs", "Saved session data.");
+                await Log(l);
+                await Task.Delay(interval, token);
+            }
+        }
+
+
         static void OnProcessExit(object sender, EventArgs e)
         {
             // Serialize session data
             string s = JsonConvert.SerializeObject(Program.sessions);
             File.WriteAllText("sessions.json", s);
         }
+
         #endregion Setup
     }
 }
