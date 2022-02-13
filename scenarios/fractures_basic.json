@@ -1,23 +1,24 @@
 {
     "info": {
         "name": "Basic Fractures Scenario",
-        "description": "Basic Fractures Scenario"
+        "description": "Low difficulty fall-onto-outstretched-hand scenario.",
+        "id": "fractures-basic"
     },
 
     "stages": [
         {
             "text": "You are grabbing your shopping in Sainsburys, when someone trips on a wet floor in the freezer aisle near you, and falls on an outstretched hand. They hit the floor pretty hard, and are now holding their arm and calling out in pain. A shop worker comes over with a first aid kit but doesn't seem to know what to do.",
-            "obs": {
-                "Resp. rate": 18,
-                "Heart rate": 98,
-                "Temperature": 36.8,
-                "Cap refill": "<2 seconds on both hands",
-                "Pain": "7/10, 10/10 on palpation/movement"
-            },
+            "obs": [
+                "Resp. rate: 18",
+                "Heart rate: 98",
+                "Temperature: 36.8",
+                "Cap refill: <2 seconds on both hands",
+                "Pain: 7/10, 10/10 on palpation/movement"
+            ],
             "questions": [
                 {
-                    "q": "What assessment tool could you use to get an idea of the patient's pain?",
-                    "a": "SOCRATES"
+                    "question": "What assessment tool could you use to get an idea of the patient's pain?",
+                    "answer": "SOCRATES"
                 }
             ]
         },
