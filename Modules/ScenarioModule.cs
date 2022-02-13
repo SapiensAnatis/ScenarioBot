@@ -35,8 +35,8 @@ namespace ScenarioBot.Modules
 
         [SlashCommand("info", "Writes the main body of text for the current stage of the active scenario.")]
         public async Task WriteScenarioText() {
-            if (Program.UserInScenario(Context.User.Id)) {
-                Session s = Program.GetUserSession(Context.User.Id);
+            Session? s = Program.GetUserSession(Context.User.Id);
+            if (s != null) {
                 string text = s.GetStage().text;
                 await RespondAsync($"**Prompt:** {text}");
             } else {
@@ -46,8 +46,8 @@ namespace ScenarioBot.Modules
 
         [SlashCommand("obs", "Display the observations for the current stage of the active scenario.")]
         public async Task WriteScenarioObs() {
-            if (Program.UserInScenario(Context.User.Id)) {
-                Session s = Program.GetUserSession(Context.User.Id);
+            Session? s = Program.GetUserSession(Context.User.Id);
+            if (s != null) {
                 List<string>? obs = s.GetStage().obs;
                 if (obs != null) {
                     await RespondAsync($"**Observations:**\n{String.Join('\n', obs)}");
@@ -61,8 +61,8 @@ namespace ScenarioBot.Modules
 
         [SlashCommand("questions", "Go through the questions for the current stage of the active scenario.")]
         public async Task WriteQuestions() {
-            if (Program.UserInScenario(Context.User.Id)) {
-                Session s = Program.GetUserSession(Context.User.Id);
+            Session? s = Program.GetUserSession(Context.User.Id);
+            if (s != null) {
                 List<Question>? qs = s.GetStage().questions;
                 if (qs != null) {
                     // Write the first question with a show answer button
@@ -75,7 +75,14 @@ namespace ScenarioBot.Modules
                     string question = qs.First().question;
                     await RespondAsync($"**Question:**: {question}", components: builder.Build());
                 } else {
-                    await RespondAsync("No questions available for this stage of the scenario.");
+                    var builder = new ComponentBuilder().WithButton(
+                            "Progress scenario",
+                            $"progress_scenario:{Context.User.Id}",
+                            ButtonStyle.Success
+                    );
+
+                    await RespondAsync("No questions available for this stage of the scenario.",
+                        components: builder.Build());
                 }
             } else {
                 await RespondAsync("You are not currently in a scenario. Use the `scenario` command to start one.");
@@ -97,7 +104,7 @@ namespace ScenarioBot.Modules
         public async Task ScenarioMenuHandler(params string[] selections) {
             var scenario_id = selections.First();
             // Scenario selected. Check if user is currently in scenario.
-            if (Program.UserInScenario(Context.User.Id)) {
+            if (Program.GetUserSession(Context.User.Id) != null) {
                 // They are already playing one
                 var builder = new ComponentBuilder()
                     .WithButton("Start new scenario", $"erase_and_start:{scenario_id}", ButtonStyle.Danger);
@@ -108,8 +115,8 @@ namespace ScenarioBot.Modules
                 );
             } else {
                 Program.StartNewScenario(scenario_id, Context.User.Id);
-                Session s = Program.GetUserSession(Context.User.Id);
-                string text = s.scenario_obj.stages[s.stage].text;
+                Session? s = Program.GetUserSession(Context.User.Id);
+                string text = s!.scenario_obj.stages[s.stage].text;
                 await RespondAsync($"**Prompt:** {text}");
             }
         }
@@ -121,10 +128,9 @@ namespace ScenarioBot.Modules
             Program.StartNewScenario(scenario_id, Context.User.Id);
 
             // Start off by writing scenario text
-            Session s = Program.GetUserSession(Context.User.Id);
-            string text = s.scenario_obj.stages[s.stage].text;
+            Session? s = Program.GetUserSession(Context.User.Id);
+            string text = s!.scenario_obj.stages[s.stage].text;
             await RespondAsync($"**Prompt:** {text}");
-            await DeleteOriginalResponseAsync();
         } 
 
         [ComponentInteraction("cancel")]
@@ -138,37 +144,39 @@ namespace ScenarioBot.Modules
         public async Task ShowAnswer(string index_str, string user_id) {
             ulong owner_id = Convert.ToUInt64(user_id);
             if (owner_id == Context.User.Id) {
-                Session s = Program.GetUserSession(owner_id);
-                List<Question> qs = s.GetStage().questions!;
+                Session? s = Program.GetUserSession(owner_id);
+                if (s != null) {
+                    List<Question> qs = s.GetStage().questions!;
 
-                int index = Convert.ToInt32(index_str);
-                string answer = s.GetStage().questions![index].answer;
+                    int index = Convert.ToInt32(index_str);
+                    string answer = s.GetStage().questions![index].answer;
 
-                // If last question, add button to progress
-                if (index + 1 == qs.Count()) {
-                    var builder = new ComponentBuilder().WithButton(
-                        "Progress scenario",
-                        $"progress_scenario:{owner_id}",
-                        ButtonStyle.Success
-                    );
+                    // If last question, add button to progress
+                    if (index + 1 == qs.Count()) {
+                        var builder = new ComponentBuilder().WithButton(
+                            "Progress scenario",
+                            $"progress_scenario:{owner_id}",
+                            ButtonStyle.Success
+                        );
 
-                    await RespondAsync($"**Answer:** {answer}", components: builder.Build());
-                } else {
-                    // Otherwise just post it
-                    await RespondAsync($"**Answer:** {answer}");
-                }
+                        await RespondAsync($"**Answer:** {answer}", components: builder.Build());
+                    } else {
+                        // Otherwise just post it
+                        await RespondAsync($"**Answer:** {answer}");
+                    }
 
-                // Show the next question, if there is one
-                index++;
-                if (index < qs.Count()) {
-                    string next_q = qs[index].question;
-                    var builder = new ComponentBuilder().WithButton(
-                            "Show answer", 
-                            // identifier:answer:current_index:user_id
-                            $"show_answer:{index}:{Context.User.Id}"
-                    );
-                    
-                    await ReplyAsync($"**Question:** {next_q}", components: builder.Build());
+                    // Show the next question, if there is one
+                    index++;
+                    if (index < qs.Count()) {
+                        string next_q = qs[index].question;
+                        var builder = new ComponentBuilder().WithButton(
+                                "Show answer", 
+                                // identifier:answer:current_index:user_id
+                                $"show_answer:{index}:{Context.User.Id}"
+                        );
+                        
+                        await ReplyAsync($"**Question:** {next_q}", components: builder.Build());
+                    }
                 }
             }
         }
@@ -177,15 +185,17 @@ namespace ScenarioBot.Modules
         public async Task ProgressScenario(string user_id) {
             ulong owner_id = Convert.ToUInt64(user_id);
             if (owner_id == Context.User.Id) {
-                Session s = Program.GetUserSession(owner_id);
-                s.stage++;
+                Session? s = Program.GetUserSession(owner_id);
+                if (s != null) {
+                    s.stage++;
 
-                // If there's still a stage left
-                if (s.stage < s.scenario_obj.stages.Count()) {
-                    await RespondAsync($"**Prompt:** {s.GetStage().text}");
-                } else {
-                    await RespondAsync("Scenario completed. Well done!");
-                    Program.ClearUserScenario(owner_id);
+                    // If there's still a stage left
+                    if (s.stage < s.scenario_obj.stages.Count()) {
+                        await RespondAsync($"**Prompt:** {s.GetStage().text}");
+                    } else {
+                        await RespondAsync("Scenario completed. Well done!");
+                        Program.ClearUserScenario(owner_id);
+                    }
                 }
             }
         }

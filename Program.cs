@@ -56,14 +56,8 @@ namespace ScenarioBot {
             return result;
         }
 
-        public static Session GetUserSession(ulong user_id) {
-            return Program.sessions.First(s => s.user_id == user_id);
-        }
-
-        public static bool UserInScenario(ulong user_id) {
-            return (
-                Program.sessions.Where(s => s.user_id == user_id).Count() > 0
-            );
+        public static Session? GetUserSession(ulong user_id) {
+            return Program.sessions.FirstOrDefault(s => s.user_id == user_id);
         }
 
         public static void ClearUserScenario(ulong user_id) {
