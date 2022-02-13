@@ -90,6 +90,7 @@ namespace ScenarioBot.Modules
         }
 
         [SlashCommand("logout", "Test saving stuff")]
+        [RequireOwner]
         public async Task Logout() {
             if (Context.User.Id == 586753708432424978) {
                 await RespondAsync("Goodbye...");

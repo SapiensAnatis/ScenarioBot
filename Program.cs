@@ -113,10 +113,12 @@ namespace ScenarioBot {
 
             client.Ready += async() =>
             {
-                if (IsDebug())
+                if (IsDebug()) {
                     await commands.RegisterCommandsToGuildAsync(configuration.GetValue<ulong>("testGuild"), true);
-                else
+                    await commands.RegisterCommandsToGuildAsync(configuration.GetValue<ulong>("eufasGuild"), true);
+                } else {
                     await commands.RegisterCommandsGloballyAsync(true);
+                }
             };
 
             client.LoggedOut += async() =>
