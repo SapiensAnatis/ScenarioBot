@@ -48,5 +48,14 @@ namespace ScenarioBot {
 
         // Not set by json deserialization
         public Scenario scenario_obj { get; set; }
+
+        // Get underlying Stage object corresponding to current state of the Scenario.
+        // Helper method that changes 
+        //     string text = s.scenario_obj.stages[s.stage].text;
+        // to
+        //     string text = s.GetStage().text;
+        public Stage GetStage() {
+            return this.scenario_obj.stages[stage];
+        }
     }
 }

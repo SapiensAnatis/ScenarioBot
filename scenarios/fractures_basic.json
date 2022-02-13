@@ -17,14 +17,47 @@
             ],
             "questions": [
                 {
-                    "question": "What assessment tool could you use to get an idea of the patient's pain?",
-                    "answer": "SOCRATES"
+                    "question": "What further assesments could you perform on this patient?",
+                    "answer": "PQRSTA (or SOCRATES) and SAMPLE"
+                },
+                {
+                    "question": "Is this person at imminent risk of death?",
+                    "answer": "Probably not..."
                 }
             ]
         },
 
         {
-            "text": "SOCRATES: bla bla"
+            "text": "You perform the secondary survey and pain assessment (/obs).",
+            "obs": [
+                "S: Pain in wrist",
+                "A: Peanuts",
+                "M: Gaviscon",
+                "P: Acid reflux",
+                "L: Meal deal from Sainsburys",
+                "E: As witnessed",
+                "-------------",
+                "P: Movement, palpitation. Support slightly alleviates pain.",
+                "Q: Sharp, throbbing",
+                "R: None",
+                "S: 7/10",
+                "T: Since fall, not improving with time",
+                "A: N/A"
+            ],
+            "questions": [
+                {
+                    "question": "Does this patient need an ambulance?",
+                    "answer": "No."
+                },
+                {
+                    "question": "What could you do to make the patient more comfortable?",
+                    "answer": "Apply a sling, and possibly provide a blanket."
+                },
+                {
+                    "question": "What would you advise the patient to do next?",
+                    "answer": "Attend a walk-in centre for an x-ray, driven by someone else."
+                }
+            ]
         }
     ]
 }

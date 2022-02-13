@@ -75,7 +75,6 @@ namespace ScenarioBot {
         #endregion
 
         #region Setup
-
         public static void Main(string[] args) {
             IConfiguration config = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json", optional: true)
