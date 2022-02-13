@@ -80,6 +80,8 @@ namespace ScenarioBot {
                     .AddJsonFile("appsettings.json", optional: true)
                     .Build();
             
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
+
             // Load scenarios
             string[] filenames = Directory.GetFiles("scenarios/");
             foreach (string f in filenames) {
@@ -123,12 +125,24 @@ namespace ScenarioBot {
                     await commands.RegisterCommandsGloballyAsync(true);
             };
 
+            client.LoggedOut += async() =>
+            {
+                // Serialize session data
+                string s = JsonConvert.SerializeObject(Program.sessions);
+                await File.WriteAllTextAsync("sessions.json", s);
+            };
+
             await services.GetRequiredService<CommandHandler>().InitializeAsync();
 
             await client.LoginAsync(TokenType.Bot, configuration["token"]);
             await client.StartAsync();
 
             await Task.Delay(Timeout.Infinite);
+        }
+
+        private static Task Quit() {
+            
+            return Task.CompletedTask;
         }
 
         private static Task Log(LogMessage msg) {
@@ -150,6 +164,13 @@ namespace ScenarioBot {
             #else
                 return false;
             #endif
+        }
+        
+        static void OnProcessExit(object sender, EventArgs e)
+        {
+            // Serialize session data
+            string s = JsonConvert.SerializeObject(Program.sessions);
+            File.WriteAllText("sessions.json", s);
         }
         #endregion Setup
     }

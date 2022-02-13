@@ -47,6 +47,7 @@ namespace ScenarioBot {
         public int stage { get; set; }
 
         // Not set by json deserialization
+        [JsonIgnore]
         public Scenario scenario_obj { get; set; }
 
         // Get underlying Stage object corresponding to current state of the Scenario.

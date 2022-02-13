@@ -81,6 +81,15 @@ namespace ScenarioBot.Modules
                 await RespondAsync("You are not currently in a scenario. Use the `scenario` command to start one.");
             }
         }
+
+        [SlashCommand("logout", "Test saving stuff")]
+        public async Task Logout() {
+            if (Context.User.Id == 586753708432424978) {
+                await RespondAsync("Goodbye...");
+                await Context.Client.LogoutAsync();
+            }
+        }
+
         #endregion
 
         #region Components
@@ -101,8 +110,7 @@ namespace ScenarioBot.Modules
                 Program.StartNewScenario(scenario_id, Context.User.Id);
                 Session s = Program.GetUserSession(Context.User.Id);
                 string text = s.scenario_obj.stages[s.stage].text;
-                await FollowupAsync($"**Prompt:** {text}");
-                await DeleteOriginalResponseAsync();
+                await RespondAsync($"**Prompt:** {text}");
             }
         }
 
@@ -181,7 +189,6 @@ namespace ScenarioBot.Modules
                 }
             }
         }
-
         #endregion
     }
 }

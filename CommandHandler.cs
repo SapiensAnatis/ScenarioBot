@@ -35,7 +35,6 @@ namespace ScenarioBot
             {
                 var ctx = new SocketInteractionContext(_client, arg);
                 await _commands.ExecuteCommandAsync(ctx, _services);
-                _commands.
             }
             catch (Exception ex)
             {

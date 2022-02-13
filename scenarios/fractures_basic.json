@@ -7,7 +7,7 @@
 
     "stages": [
         {
-            "text": "You are grabbing your shopping in Sainsburys, when someone trips on a wet floor in the freezer aisle near you, and falls on an outstretched hand. They hit the floor pretty hard, and are now holding their arm and calling out in pain. A shop worker comes over with a first aid kit but doesn't seem to know what to do.",
+            "text": "You are grabbing your shopping in Sainsbury's, when someone trips on a wet floor in the freezer aisle near you, and falls on an outstretched hand. They hit the floor pretty hard, and are now holding their arm and calling out in pain. A shop worker comes over with a first aid kit but doesn't seem to know what to do.",
             "obs": [
                 "Resp. rate: 18",
                 "Heart rate: 98",
@@ -17,12 +17,12 @@
             ],
             "questions": [
                 {
-                    "question": "What further assesments could you perform on this patient?",
-                    "answer": "PQRSTA (or SOCRATES) and SAMPLE"
+                    "question": "How would you perform your primary survey in this case?",
+                    "answer": "You are unconcerned about response, airway, etc. as they are crying out in pain. Managing the crowd and the wet spot may be a consideration under danger."
                 },
                 {
-                    "question": "Is this person at imminent risk of death?",
-                    "answer": "Probably not..."
+                    "question": "What further assesments could you perform on this patient?",
+                    "answer": "PQRSTA (or SOCRATES) and SAMPLE"
                 }
             ]
         },
@@ -35,8 +35,8 @@
                 "M: Gaviscon",
                 "P: Acid reflux",
                 "L: Meal deal from Sainsburys",
-                "E: As witnessed",
-                "-------------",
+                "E: As witnessed: fall onto outstretched hand after slipping",
+                "\n",
                 "P: Movement, palpitation. Support slightly alleviates pain.",
                 "Q: Sharp, throbbing",
                 "R: None",
@@ -55,7 +55,7 @@
                 },
                 {
                     "question": "What would you advise the patient to do next?",
-                    "answer": "Attend a walk-in centre for an x-ray, driven by someone else."
+                    "answer": "Attend a walk-in centre for an X-ray, driven by someone else."
                 }
             ]
         }
