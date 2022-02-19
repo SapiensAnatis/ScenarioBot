@@ -118,9 +118,17 @@ namespace ScenarioBot {
             }
 
             // Load scenario session data
-            string session_json = File.ReadAllText("sessions.json");
-            Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json)
-                ?? throw new Exception("Failed to deserialize session data!");
+            try {
+                string session_json = File.ReadAllText("sessions.json");
+                Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json)
+                    ?? throw new Exception("Failed to deserialize session data!");
+            } catch (FileNotFoundException) {
+                Log(new LogMessage(
+                    LogSeverity.Info, "Main()", $"Created new sessions.json file."
+                ));
+                File.Create("sessions.json");
+                Program.sessions = new List<Session>();
+            }
             
             // Initialize session objects
             foreach (Session sesh in Program.sessions) {
