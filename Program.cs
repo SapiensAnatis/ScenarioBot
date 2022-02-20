@@ -30,6 +30,9 @@ namespace ScenarioBot {
             Program.scenarios.Clear();
             string[] filenames = Directory.GetFiles("scenarios/");
             foreach (string f in filenames) {
+                if (f.EndsWith("template.json"))
+                    continue;
+
                 await Log(new LogMessage(
                     LogSeverity.Info, "ReloadScenarios()", $"Loading scenario {f}..."
                 ));

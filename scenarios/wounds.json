@@ -1,0 +1,58 @@
+{
+    "info": {
+        "name": "Injured cyclist",
+        "description": "A cyclist has fallen from his bike after impacting a car door.",
+        "id": "wounds1"
+    },
+
+    "stages": [
+        {
+            "text": "It's 9:30. You're walking up forum hill to get to one of your lectures and by Peter Chalk you see a cyclist get knocked from their bike by a car passenger opening their door without looking. You perform a primary and secondary survey, as well as a set of obs (/obs).",
+            "obs": [
+                "**Primary survey:**",
+                "D: There are lots of people and a few cars around. The patient fell onto the path.",
+                "R: Alert",
+                "A: Fine",
+                "B: A little fast, but nothing worrying",
+                "C: No obvious bleeding",
+                "**Secondary survey**",
+                "S: Complaining of rib and right shoulder pain.",
+                "A: N/A",
+                "M: Salbutamol and Clenil. Took some paracetamol around 1 hour ago as well as he had a headache.",
+                "P: Asthmatic, controlled with Salbutamol and Clenil inhalers.",
+                "L: Last ate cereal at 7:30 and had a glass of water around 30 minutes ago.",
+                "E: Believes that when he was knocked off his bike he came off the front and caught his chest or stomach on the handlebars as he was falling. Aside from that, he doesn't really know how he impacted the floor. He was wearing a helmet.",
+                "**Obs**",
+                "RR: 20",
+                "Pulse: 98",
+                "Consciousness: Alert",
+                "Temperature: 36.8"
+            ],
+            "questions": [
+                {
+                    "question": "What would you want to do next?",
+                    "answer": "See if you can do a head to toe survey, or at the very least look at his abdomen and shoulder."
+                }
+            ]   
+        },
+        {
+            "text": "After performing your head-to-toe survey, you find that he has an abrasion on his right shoulder. His abdomen appears mottled and purple and is tender to the touch. You also notice that his skin is very ashen and he is sweating.",
+            "obs": [
+                "RR: 26",
+                "Pulse: 109",
+                "Consciousness: Voice",
+                "Temperature: 26.6"
+            ],
+            "questions": [
+                {
+                    "question": "What do you suspect is happening?",
+                    "answer": "The patient is going into shock."
+                },
+                {
+                    "question": "How would you treat them?",
+                    "answer": "Call 999, raise legs, cover him with something to keep him warm, continue monitoring until help arrives."
+                }
+            ] 
+        }
+    ]
+}

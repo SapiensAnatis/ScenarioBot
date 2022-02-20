@@ -1,0 +1,52 @@
+{
+    "info": {
+        "name": "Blood sugar scenario",
+        "description": "A friend suddenly starts to feel weak and unwell.",
+        "id": "bloodsugar1"
+    },
+
+    "stages": [
+        {
+            "text": "It is 10:30 and you are in the Forum on your way to a lecture when the person that you are walking with starts complaining that they feel very weak and unwell.",
+            "questions": [
+                {
+                    "question": "What would you want to do initially?",
+                    "answer": "Sit her down somewhere before asking a few questions about how she is feeling."
+                }
+            ]   
+        },
+        {
+            "text": "You sit her down and because she is already talking to you, you skip the primary survey and perform the secondary survey (/obs).",
+            "obs": [
+                "S: She says that she's feeling very weak and a little faint. She is getting heart palpitations and her pulse feels strong and is bounding.",
+                "A: No allergies",
+                "M: She uses preventer inhalers daily and reliever inhalers as and when she needs them. She is also a Type I diabetic and uses insulin to manage this. She has a continuous glucose monitoring device and uses insulin injections and insulin pens.",
+                "P: She has fairly well controlled asthma, and type I diabetes.",
+                "L: She was running late this morning and only managed to have a glass of apple juice for breakfast. She brought a cereal bar with her and hasn't had a chance to eat it just yet.",
+                "E: She has been feeling like this for around 10 minutes."
+            ],
+            "questions": [
+                {
+                    "question": "What do you want to do?",
+                    "answer": "It would be useful to have a blood glucose measurement. Given that she has a chronic health condition, it is very likely that she will be completely fine sorting this out herself, most people with Type I diabetes are very good at managing their condition and have the different supplies necessary to keep them healthy. It might just be that you are there to provide support."
+                },
+                {
+                    "question": "She checks her blood glucose and notes that it is 3.5 mmol/L. What is the normal range for blood sugar?",
+                    "answer": "4-7 mmol/L, so this is a little bit low."
+                },
+                {
+                    "question": "She asks you to get her something sugary to help treat her low blood sugar. What could you get?",
+                    "answer": "150-200 ml fruit juice or sugary drink, glucose tablet, small handful of sweets etc. Note that sugar-free drinks e.g. Coke Zero will be of no use."
+                },
+                {
+                    "question": "She eats/drinks what you give her and also eats her cereal bar, why does she eat the cereal bar?",
+                    "answer": "Cereal bars have complex carbohydrates in them, these are slower acting and prevent a further dip in blood sugar after the initial intake of the simple carbohydrates."
+                },
+                {
+                    "question": "When should she do a repeat measurement of her blood glucose level?",
+                    "answer": "15 minutes later."
+                }
+            ]   
+        }
+    ]
+}

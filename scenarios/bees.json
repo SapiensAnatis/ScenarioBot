@@ -1,0 +1,60 @@
+{
+    "info": {
+        "name": "Bee sting anaphylaxis",
+        "description": "Not the bees!",
+        "id": "anaphylaxis1"
+    },
+
+    "stages": [
+        {
+            "text": "It's 14:30, you're on a walk at the quay when suddenly a group of people starts screaming and running away in all directions from a tree. You see two people on the floor.",
+            "questions": [
+                {
+                    "question": "What should you do? Is it safe to approach?",
+                    "answer": "Following Step 1-2-3, you should approach with caution as there are two casualites. You may want to consider moving the patient as moving the danger is not possible."
+                }
+            ]   
+        },
+        {
+            "text": "You have assessed the situation and it is still safe to approach both patients. You realise that one of them is fine (he kneeled down to reassure his friend). You check the other patient laying down, and perform a primary survey (/obs).",
+            "obs": [
+                "D - fine to approach",
+                "R - patient is crying and very distressed - but alert (answers questions). Patient explains he got stung by a bee and it is extremely painful (8/10)",
+                "A - clear",
+                "B - very quick, shallow breathing - patient gasping for breath ( Respiration rate: 24). Patient looks flushed",
+                "C - no bleeding"
+            ],
+            "questions": [
+                {
+                    "question": "What should you do next?",
+                    "answer": "Perform a secondary survey to get a better idea of the patient's symptoms and medical history.S: area around the sting (swollen, red, sting still present)\nA: bee sting, peanuts\nM: none but have medication in case of allergies\nP: no current medical condition\nL: Pizza and a diet coke can at 12:00\nE: stung by a bee"
+                },
+                {
+                    "question": "What else should you ask?",
+                    "answer": "Ask them about the bee allergy and the medication: have they used it before, and have they been stung by a bee before?"
+                },
+                {
+                    "question": "How might you treat the patient's injury?",
+                    "answer": "Remove the bee stinger using a fingernil tip or a credit card."
+                }
+            ]   
+        },
+        {
+            "text": "The patient explains they have two EpiPens with them prescribed by their doctor but can't remember how to use them.",
+            "questions": [
+                {
+                    "question": "How would you help them?",
+                    "answer": "Encourage the patient to use their autoinjector by themselves: remove the safety cap and hold with your fist (being careful not to place your thumb over the top), push the tip firmly against their thigh, hold for 10 seconds, remove, and massage injection site for 10 seconds."
+                },
+                {
+                    "question": "The patient's condition has not improved. Should you give a second dose of the EpiPen, and if so, after how long?",
+                    "answer": "5 minutes."
+                },
+                {
+                    "question": "If there is *still* no improvement after two uses of the autoinjector, what should you do next?",
+                    "answer": "Call an ambulance, and continue to monitor their vital signs, while helping them remain comfortable."
+                }
+            ]   
+        }
+    ]
+}
