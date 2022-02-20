@@ -85,7 +85,7 @@ namespace ScenarioBot.Modules
                 );
 
                 string question = qs.First().question;
-                await RespondAsync($"**Question:**: {question}", components: builder.Build());
+                await RespondAsync($"**Question:** {question}", components: builder.Build());
             } else {
                 var builder = new ComponentBuilder().WithButton(
                         "Progress scenario",
@@ -138,7 +138,7 @@ namespace ScenarioBot.Modules
                 Program.StartNewScenario(scenario_id, Context.User.Id);
                 s = Program.GetSessionByUser(Context.User.Id);
                 string text = s!.scenario_obj.stages[s.stage].text;
-                await RespondAsync($"**Prompt:** {text}");
+                await RespondAsync($"{Context.User.Mention} **Prompt:** {text}");
             } else {
                 // They are already playing one
                 var builder = new ComponentBuilder()
@@ -175,7 +175,7 @@ namespace ScenarioBot.Modules
             // Start off by writing scenario text
             Session? s = Program.GetSessionByUser(Context.User.Id);
             string text = s!.scenario_obj.stages[s.stage].text;
-            await RespondAsync($"**Prompt:** {text}");
+            await RespondAsync($"{Context.User.Mention} **Prompt:** {text}");
         } 
         
         // TODO: Consider embedding the answer and next prompt in button id? Otherwise it could
@@ -208,10 +208,10 @@ namespace ScenarioBot.Modules
                     ButtonStyle.Success
                 );
 
-                await RespondAsync($"**Answer:** {answer}", components: builder.Build());
+                await RespondAsync($"{Context.User.Mention} **Answer:** {answer}", components: builder.Build());
             } else {
                 // Otherwise just post it
-                await RespondAsync($"**Answer:** {answer}");
+                await RespondAsync($"{Context.User.Mention} **Answer:** {answer}");
             }
 
             // Show the next question, if there is one
@@ -224,7 +224,7 @@ namespace ScenarioBot.Modules
                         $"show_answer:{index}:{s.guid}"
                 );
                 
-                await ReplyAsync($"**Question:** {next_q}", components: builder.Build());
+                await ReplyAsync($"{Context.User.Mention} **Question:** {next_q}", components: builder.Build());
             }
         }
 
@@ -251,7 +251,7 @@ namespace ScenarioBot.Modules
 
             // If there's still a stage left
             if (s.stage < s.scenario_obj.stages.Count()) {
-                await RespondAsync($"**Prompt:** {s.GetStage().text}");
+                await RespondAsync($"{Context.User.Mention} **Prompt:** {s.GetStage().text}");
             } else {
                 await RespondAsync("Scenario completed. Well done!");
                 Program.ClearUserScenario(s.user_id);
