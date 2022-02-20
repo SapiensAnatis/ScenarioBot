@@ -22,22 +22,19 @@ namespace ScenarioBot {
 
         // TODO: I should probably move these out of Program and into another class to reduce
         // clutter..
-        public static async Task ReloadScenarios() {
-            await Log(new LogMessage(
-                LogSeverity.Info, "ReloadScenarios()", "Scenario reload triggered"
-            ));
-
+        public static void LoadScenarios() {
             Program.scenarios.Clear();
             string[] filenames = Directory.GetFiles("scenarios/");
             foreach (string f in filenames) {
-                if (f.EndsWith("template.json"))
+                if (f.EndsWith("template.json")) {
                     continue;
+                }
 
-                await Log(new LogMessage(
+                Log(new LogMessage(
                     LogSeverity.Info, "ReloadScenarios()", $"Loading scenario {f}..."
                 ));
 
-                string json = await File.ReadAllTextAsync(f);
+                string json = File.ReadAllText(f);
                 Scenario s = JsonConvert.DeserializeObject<Scenario>(json) 
                     ?? throw new Exception("Deserialized scenario was null!");
 
@@ -106,32 +103,12 @@ namespace ScenarioBot {
             
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
-            // Load scenarios
-            string[] filenames = Directory.GetFiles("scenarios/");
-            foreach (string f in filenames) {
-                Log(new LogMessage(
-                    LogSeverity.Info, "Main()", $"Loading scenario {f}..."
-                ));
-
-                string json = File.ReadAllText(f);
-                Scenario s = JsonConvert.DeserializeObject<Scenario>(json) 
-                    ?? throw new Exception("Deserialized scenario was null!");
-
-                Program.scenarios.Add(s);
-            }
+            LoadScenarios();
 
             // Load scenario session data
-            try {
-                string session_json = File.ReadAllText("sessions.json");
-                Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json)
-                    ?? throw new Exception("Failed to deserialize session data!");
-            } catch (FileNotFoundException) {
-                Log(new LogMessage(
-                    LogSeverity.Info, "Main()", $"Created new sessions.json file."
-                ));
-                File.Create("sessions.json");
-                Program.sessions = new List<Session>();
-            }
+            string session_json = File.ReadAllText("sessions.json");
+            Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json)
+                ?? throw new Exception("Failed to deserialize session data!");
             
             // Initialize session objects
             foreach (Session sesh in Program.sessions) {

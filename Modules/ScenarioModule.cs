@@ -108,7 +108,7 @@ namespace ScenarioBot.Modules
         [SlashCommand("reload", "Reload the scenario list.")]
         [RequireOwner]
         public async Task ReloadScenarios() {
-            await Program.ReloadScenarios();
+            Program.LoadScenarios();
             await RespondAsync("Reload successful.", ephemeral: true);
         }
 
