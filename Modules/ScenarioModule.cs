@@ -52,7 +52,7 @@ namespace ScenarioBot.Modules
             if (s != null) {
                 List<string>? obs = s.GetStage().obs;
                 if (obs != null) {
-                    await RespondAsync($"**Observations:**\n{String.Join('\n', obs)}");
+                    await RespondAsync($"**Observations:**\n\n{String.Join('\n', obs)}");
                 } else {
                     await RespondAsync("No obs available for this stage of the scenario.");
                 }
@@ -138,7 +138,7 @@ namespace ScenarioBot.Modules
                 Program.StartNewScenario(scenario_id, Context.User.Id);
                 s = Program.GetSessionByUser(Context.User.Id);
                 string text = s!.scenario_obj.stages[s.stage].text;
-                await RespondAsync($"{Context.User.Mention} **Prompt:** {text}");
+                await RespondAsync($"{Context.User.Mention} **Prompt:** {text}", allowedMentions: AllowedMentions.None);
             } else {
                 // They are already playing one
                 var builder = new ComponentBuilder()
@@ -175,7 +175,7 @@ namespace ScenarioBot.Modules
             // Start off by writing scenario text
             Session? s = Program.GetSessionByUser(Context.User.Id);
             string text = s!.scenario_obj.stages[s.stage].text;
-            await RespondAsync($"{Context.User.Mention} **Prompt:** {text}");
+            await RespondAsync($"{Context.User.Mention} **Prompt:** {text}", allowedMentions: AllowedMentions.None);
         } 
         
         // TODO: Consider embedding the answer and next prompt in button id? Otherwise it could
@@ -208,10 +208,13 @@ namespace ScenarioBot.Modules
                     ButtonStyle.Success
                 );
 
-                await RespondAsync($"{Context.User.Mention} **Answer:** {answer}", components: builder.Build());
+                await RespondAsync($"{Context.User.Mention} **Answer:** {answer}", 
+                    components: builder.Build(),
+                    allowedMentions: AllowedMentions.None);
             } else {
                 // Otherwise just post it
-                await RespondAsync($"{Context.User.Mention} **Answer:** {answer}");
+                await RespondAsync($"{Context.User.Mention} **Answer:** {answer}",
+                    allowedMentions: AllowedMentions.None);
             }
 
             // Show the next question, if there is one
@@ -224,7 +227,9 @@ namespace ScenarioBot.Modules
                         $"show_answer:{index}:{s.guid}"
                 );
                 
-                await ReplyAsync($"{Context.User.Mention} **Question:** {next_q}", components: builder.Build());
+                await ReplyAsync($"{Context.User.Mention} **Question:** {next_q}", 
+                    components: builder.Build(),
+                    allowedMentions: AllowedMentions.None);
             }
         }
 
@@ -251,9 +256,9 @@ namespace ScenarioBot.Modules
 
             // If there's still a stage left
             if (s.stage < s.scenario_obj.stages.Count()) {
-                await RespondAsync($"{Context.User.Mention} **Prompt:** {s.GetStage().text}");
+                await RespondAsync($"{Context.User.Mention} **Prompt:** {s.GetStage().text}", allowedMentions: AllowedMentions.None);
             } else {
-                await RespondAsync("Scenario completed. Well done!");
+                await RespondAsync($"{Context.User.Mention} Scenario completed. Well done!", allowedMentions: AllowedMentions.None);
                 Program.ClearUserScenario(s.user_id);
             }
         }
