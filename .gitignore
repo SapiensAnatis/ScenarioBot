@@ -11,3 +11,6 @@ ssh*
 
 # Program state
 sessions.json
+
+# Utilities for Oracle Cloud
+remotestart.sh

@@ -105,6 +105,19 @@ namespace ScenarioBot.Modules
             await Context.Client.LogoutAsync();
         }
 
+        [SlashCommand("help", "Display help menu.")]
+        public async Task Help() {
+            string help_string = @"ScenarioBot is an interactive Discord bot that enables you to"
+            + " through first aid scenarios collaboratively. You can start a scenario using `/scenario.`"
+            + " Scenarios are comprised of 'stages', each of which has a text prompt (`/info`), some"
+            + " observations (`/obs`) and some questions (`/questions`). Going through all the questions"
+            + " will advance the scenario to its next stage, or complete it if there aren't any more."
+            + "\n\n**Bot developed by**: dreadfullydistinct#1458 (contact in case of bugs or inaccuracies!)"
+            + "\n**Source code**: https://github.com/SapiensAnatis/ScenarioBot";
+
+            await RespondAsync(help_string);
+        }
+
         [SlashCommand("reload", "Reload the scenario list.")]
         [RequireOwner]
         public async Task ReloadScenarios() {
