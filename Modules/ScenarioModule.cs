@@ -113,7 +113,7 @@ namespace ScenarioBot.Modules
             + " observations (`/obs`) and some questions (`/questions`). Going through all the questions"
             + " will advance the scenario to its next stage, or complete it if there aren't any more."
             + "\n\n**Bot developed by**: dreadfullydistinct#1458 (contact in case of bugs or inaccuracies!)"
-            + "\n**Source code**: https://github.com/SapiensAnatis/ScenarioBot";
+            + "\n**Source code**: <https://github.com/SapiensAnatis/ScenarioBot>";
 
             await RespondAsync(help_string);
         }
@@ -143,7 +143,9 @@ namespace ScenarioBot.Modules
                 // They are already playing one
                 var builder = new ComponentBuilder()
                     // label:session_guid:new_scenario_id
-                    // guid uniquely identifies the Session, to stop the button being pressed by randoms
+                    // guid uniquely identifies the Session, to ensure that the button only applies 
+                    // to the current scenario. While the prompt is ephemeral, I guess a user might
+                    // press it later or something idk
                     .WithButton("Start new scenario", $"erase_and_start:{s.guid}:{scenario_id}", ButtonStyle.Danger);
 
                 await RespondAsync(
