@@ -11,7 +11,7 @@
             "questions": [
                 {
                     "question": "What should you do? Is it safe to approach?",
-                    "answer": "Following Step 1-2-3, you should approach with caution as there are two casualites. You may want to consider moving the patient as moving the danger is not possible."
+                    "answer": "Following Step 1-2-3, you should approach with caution as there are two casualties. You may want to consider moving the patient as moving the danger is not possible."
                 }
             ]   
         },
@@ -35,7 +35,7 @@
                 },
                 {
                     "question": "How might you treat the patient's injury?",
-                    "answer": "Remove the bee stinger using a fingernil tip or a credit card."
+                    "answer": "Remove the bee stinger using a fingernail tip or a credit card."
                 }
             ]   
         },
