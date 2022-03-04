@@ -1,0 +1,52 @@
+{
+    "info": {
+        "name": "Lightweight, baby!",
+        "description": "Difficulty: Medium",
+        "id": "roids"
+    },
+
+    "stages": [
+        {
+            "text": "You are in the gym, training legs, when you suddenly hear a loud scream from the rack next to you. As you look over, you see someone in the middle of a rep squatting 4 plates (180kg), but he suddenly collapses forward and the bar slips down his back before rolling behind him. He is now lying on the floor and appears to be unconscious.",
+            "questions": [
+                {
+                    "question": "What would you do next?",
+                    "answer": "Perform your primary survey: check for response (none), call for help, and check for breathing (he is)."
+                }
+            ]   
+        },
+        {
+            "text": "The man quickly regains consciousness, and you are able to take some observations and perform a secondary survey (/obs).",
+            "obs": [
+                "HR: 130",
+                "RR: 22",
+                "",
+                "S: Headache, thirst, chest pain, dizziness",
+                "A: Shellfish",
+                "M: 250mg trenbolone, 300mg testosterone (both weekly)",
+                "P: None relevant",
+                "L: Pre-workout drink (caffeinated) with 5 scoops",
+                "E: As witnessed"
+            ],
+            "questions": [
+                {
+                    "question": "What do you think is the cause of his symptoms?",
+                    "answer": "Possible caffeine overdose. The steroid use could present a long-term health concern but is not particularly relevant in a first aid context."
+                },
+                {
+                    "question": "What other course(s) of action would be a good idea?",
+                    "answer": "Inquiring about pain (perhaps with PQRSTA or SOCRATES) and/or performing a head-to-toe survey to identify any injuries that may have been sustained when he fell."
+                }
+            ]   
+        },
+        {
+            "text": "Upon performing a head-to-toe survey you find that he has a bit of a graze on the back of his neck (from the knurling of the barbell as it slid down) and a slight bump on his forehead.",
+            "questions": [
+                {
+                    "question": "What would you advise the patient to do next?",
+                    "answer": "He should probably attend a walk-in centre* to establish the severity of caffeine overdose and receive treatment for it, and ensure that the head injury is not too serious.\n\n*Driven by someone else, due to his dizziness!"
+                }
+            ]   
+        }
+    ]
+}
