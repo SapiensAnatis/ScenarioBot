@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="appsettings.json" DestinationFolder="$(OutDir)" />
     <Copy SourceFiles="scenarios/fractures_basic.json" DestinationFolder="$(OutDir)/scenarios" />
     <Copy SourceFiles="scenarios/fractures_complex.json" DestinationFolder="$(OutDir)/scenarios" />
-    <Copy SourceFiles="sessions.json" DestinationFolder="$(OutDir)" />
   </Target>
 </Project>
