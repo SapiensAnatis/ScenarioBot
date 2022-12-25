@@ -18,9 +18,10 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
   </ItemGroup>
 
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="appsettings.json" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="scenarios/fractures_basic.json" DestinationFolder="$(OutDir)/scenarios" />
-    <Copy SourceFiles="scenarios/fractures_complex.json" DestinationFolder="$(OutDir)/scenarios" />
-  </Target>
+  <ItemGroup> 
+    <Content Include="scenarios\**"> 
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
+    </Content> 
+  </ItemGroup>
+
 </Project>
