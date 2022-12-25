@@ -6,7 +6,7 @@ bin/*
 obj/*
 
 # Secrets
-appsettings.json
+.token
 ssh*
 
 # Program state

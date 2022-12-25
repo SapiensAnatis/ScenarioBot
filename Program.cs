@@ -109,7 +109,7 @@ namespace ScenarioBot {
             if (!File.Exists("sessions.json")) {
                 File.Create("sessions.json");
             }
-            
+
             string session_json = File.ReadAllText("sessions.json");
             
             Program.sessions = JsonConvert.DeserializeObject<List<Session>>(session_json)
@@ -158,7 +158,7 @@ namespace ScenarioBot {
 
             await services.GetRequiredService<CommandHandler>().InitializeAsync();
 
-            await client.LoginAsync(TokenType.Bot, configuration["token"]);
+            await client.LoginAsync(TokenType.Bot, File.ReadAllText(".token"));
             await client.StartAsync();
 
             await Task.Delay(Timeout.Infinite);
