@@ -16,7 +16,7 @@
             ]   
         },
         {
-            "text": "You have assessed the situation and it is still safe to approach both patients. You realise that one of them is fine (he kneeled down to reassure his friend). You check the other patient laying down, and perform a primary survey (/obs).",
+            "text": "You have assessed the situation and you see that the cause of the disturbance is some kind of hive or nest near the tree buzzing with insects. It is some distance away from the casualty so you feel it is still safe to approach both patients and you do so. You realise that one of them is fine (he kneeled down to reassure his friend). You check the other patient laying down, and perform a primary survey (/obs).",
             "obs": [
                 "D - fine to approach",
                 "R - patient is crying and very distressed - but alert (answers questions). Patient explains he got stung by a bee and it is extremely painful (8/10)",
@@ -27,7 +27,7 @@
             "questions": [
                 {
                     "question": "What should you do next?",
-                    "answer": "Perform a secondary survey to get a better idea of the patient's symptoms and medical history.S: area around the sting (swollen, red, sting still present)\nA: bee sting, peanuts\nM: none but have medication in case of allergies\nP: no current medical condition\nL: Pizza and a diet coke can at 12:00\nE: stung by a bee"
+                    "answer": "The patent appears to have difficulty breathing, so it would be wise to call an ambulance immediately. Perform a secondary survey to get a better idea of the patient's symptoms and medical history.S: area around the sting (swollen, red, sting still present)\nA: bee sting, peanuts\nM: none but have medication in case of allergies\nP: no current medical condition\nL: Pizza and a diet coke can at 12:00\nE: stung by a bee"
                 },
                 {
                     "question": "What else should you ask?",
@@ -52,7 +52,7 @@
                 },
                 {
                     "question": "If there is *still* no improvement after two uses of the autoinjector, what should you do next?",
-                    "answer": "Call an ambulance, and continue to monitor their vital signs, while helping them remain comfortable."
+                    "answer": "Update the 999 call handler about the situation, and continue to monitor their vital signs, while helping them remain comfortable."
                 }
             ]   
         }
