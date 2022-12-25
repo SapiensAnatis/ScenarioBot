@@ -1,11 +1,9 @@
 name: release
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Release name'
-        required: true
+  push:
+    tags:
+      - "*"
 
 
 jobs:
